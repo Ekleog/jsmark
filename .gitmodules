@@ -1,0 +1,6 @@
+[submodule "vendor/octane"]
+	path = vendor/octane
+	url = https://github.com/chromium/octane/
+[submodule "vendor/jsnes"]
+	path = vendor/jsnes
+	url = https://github.com/Ekleog/jsnes
