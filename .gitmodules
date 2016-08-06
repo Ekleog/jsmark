@@ -4,3 +4,6 @@
 [submodule "vendor/jsnes"]
 	path = vendor/jsnes
 	url = https://github.com/Ekleog/jsnes
+[submodule "vendor/jsbench"]
+	path = vendor/jsbench
+	url = https://github.com/Ekleog/jsbench
