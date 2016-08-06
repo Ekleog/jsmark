@@ -20,17 +20,18 @@ pach" (ie. the first one passed on the command line).
 Usage
 =====
 
-First, clone the repository with the submodules (the actual benchmarks):
+First, clone the repository with the submodules (the actual benchmarks) (omit
+the `-j4` if using git before v1.9, it just makes the download faster):
 ```
 git clone --recursive -j4 https://github.com/Ekleog/jsmark
 ```
 
-Go into the directory
+Go into the directory:
 ```
 cd jsmark
 ```
 
-Finally, run it with
+And finally, run it with:
 ```
 ./jsmark [path to JS shell without the patch] [path to JS shell with the patch]
 ```
