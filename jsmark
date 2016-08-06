@@ -7,6 +7,7 @@ if __name__ != '__main__':
 from math import sqrt
 from lib import jsnes, octane
 import os
+import random
 import sys
 
 if len(sys.argv) != 3:
@@ -45,6 +46,19 @@ def analyze(results):
         result[k] = analyze_list(l)
     return result
 
+def most_wanted(before, after):
+    if random.randint(0, 1) == 0:
+        return list(benchs.keys())[random.randrange(len(benchs))]
+    rel_var = {}
+    for k in before.keys():
+        b = k.split('~')[0]
+        if not b in rel_var:
+            rel_var[b] = 0.
+        rel_var[b] = max(rel_var[b],
+                         before[k]['interv'] / before[k]['mean'],
+                         after[k]['interv'] / after[k]['mean'])
+    return max(rel_var, key=rel_var.get)
+
 def pretty(before, after):
     keylen, meanlen, intervlen = 0, 0, 0
     for d in (before, after):
@@ -70,21 +84,21 @@ before = {}
 after = {}
 
 # Initialization
-print()
-print('... Initialization ...')
-print()
 for i in range(3):
+    print()
+    print('... Initialization (' + str(i + 1) + '/3) ...')
+    print()
     for k in benchs:
         run(k, interp_before, before)
         run(k, interp_after, after)
-pretty(analyze(before), analyze(after))
+    pretty(analyze(before), analyze(after))
 
 # Main loop
 while True:
-    for k in benchs:
-        print()
-        print('... Running ' + k + ' ...')
-        print()
-        run(k, interp_before, before)
-        run(k, interp_after, after)
-        pretty(analyze(before), analyze(after))
+    k = most_wanted(analyze(before), analyze(after))
+    print()
+    print('... Running ' + k + ' ...')
+    print()
+    run(k, interp_before, before)
+    run(k, interp_after, after)
+    pretty(analyze(before), analyze(after))
