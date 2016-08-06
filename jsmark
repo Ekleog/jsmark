@@ -4,6 +4,7 @@ if __name__ != '__main__':
     print('This script does not handle being used as a library. Sorry.')
     exit(1)
 
+from datetime import datetime
 from math import sqrt
 from lib import jsbench, jsnes, octane
 import os
@@ -22,6 +23,8 @@ benchs = {
     'jsnes': jsnes.Bench,
     'octane': octane.Bench,
 }
+
+time_start = datetime.now()
 
 def run(bench, interp, results):
     for (k, v) in benchs[bench].run(interp).items():
@@ -98,7 +101,7 @@ for i in range(3):
 while True:
     k = most_wanted(analyze(before), analyze(after))
     print()
-    print('... Running ' + k + ' ...')
+    print('... Running ' + k + ' (current total running time: ' + str(datetime.now() - time_start) + ') ...')
     print()
     run(k, interp_before, before)
     run(k, interp_after, after)
