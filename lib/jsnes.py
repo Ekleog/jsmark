@@ -9,7 +9,7 @@ class Bench:
         os.chdir(os.path.join(sys.path[0], 'vendor', 'jsnes', 'test'))
         res = subp.run([interp, 'shell-bench.js'], stdout=subp.PIPE, universal_newlines=True)
         if res.returncode != 0:
-            raise "Error when trying to run jsnes with interpreter " + interp + "!"
+            raise RuntimeError("Error when trying to run jsnes with interpreter " + interp + "!")
         warmup, result = 0., 0.
         nwarmup, nresult = 0., 0.
         for line in res.stdout.split('\n'):
