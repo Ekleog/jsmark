@@ -10,7 +10,7 @@ class Bench:
         tests = subp.run("echo -n */*/*.js", shell=True, stdout=subp.PIPE,
                          universal_newlines=True)
         if tests.returncode != 0:
-            raise RuntimeError("Error when listing the test cases of jsbench!")
+            return "Error when listing the test cases of jsbench!"
         result = {}
         for test in tests.stdout.split(' '):
             res = subp.run([interp, test], stdout=subp.PIPE,

@@ -27,7 +27,11 @@ benchs = {
 time_start = datetime.now()
 
 def run(bench, interp, results):
-    for (k, v) in benchs[bench].run(interp).items():
+    res = benchs[bench].run(interp)
+    if type(res) == str:
+        sys.stderr.write(res);
+        return
+    for (k, v) in res.items():
         name = bench + '~' + k
         if not name in results:
             results[name] = []
